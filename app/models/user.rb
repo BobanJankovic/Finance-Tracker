@@ -30,7 +30,41 @@ class User < ApplicationRecord
   def self.search(param)
     param.strip!
     param.downcase!
-    to_send_back = last_name_matches(param) || email_matches(param) || first_name_matches(param) 
+
+
+    begin
+      if param == last_name_matches(param).first.last_name.downcase!.to_s
+        puts "boki nasao si prezime"
+        to_send_back=last_name_matches(param)
+      end
+      rescue
+        puts 'I am rescued.' 
+      end
+
+      begin
+        if param == first_name_matches(param).first.first_name.downcase!.to_s
+          puts "boki nasao si ime"
+          to_send_back=first_name_matches(param)
+        end
+        rescue
+          puts 'I am rescued.' 
+        end
+
+      
+      begin
+        if param == email_matches(param).first.email.to_s
+          to_send_back=email_matches(param)
+        end
+      rescue
+        puts 'I am rescued.' 
+      end
+        
+
+   
+
+  
+
+    
     return nil unless to_send_back
     to_send_back
   end
