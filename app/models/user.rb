@@ -58,13 +58,7 @@ class User < ApplicationRecord
       rescue
         puts 'I am rescued.' 
       end
-        
-
-   
-
-  
-
-    
+         
     return nil unless to_send_back
     to_send_back
   end
