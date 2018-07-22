@@ -58,6 +58,7 @@ class User < ApplicationRecord
       rescue
         puts 'I am rescued.' 
       end
+
          
     return nil unless to_send_back
     to_send_back
@@ -65,6 +66,14 @@ class User < ApplicationRecord
     
   def self.first_name_matches(param)
     matches('first_name', param)
+  end
+
+  def except_current_user(users)
+    users.reject { |user| user.id == self.id }
+  end
+
+  def not_friends_with?(friend_id)
+    friendships.where(friend_id: friend_id).count < 1
   end
     
   def self.last_name_matches(param)

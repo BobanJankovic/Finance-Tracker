@@ -1,9 +1,10 @@
 class FriendshipsController < ApplicationController
 
     def destroy
-      @friend = Friendship.find(params[:id])
+      @friend = current_user.friendships.where(friend_id: params[:id]).first
       @friend.destroy
-      flash[:notice] = "Stock was successfully removed from portfolio"
+      flash[:notice] = "Friend was removed successfully"
       redirect_to my_friends_path
     end
+    
 end

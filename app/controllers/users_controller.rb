@@ -1,7 +1,9 @@
 class UsersController < ApplicationController
   
   def show
-    @friend = User.find(params[:id])
+    @user = User.find(params[:id])
+    @user_stocks=@user.stocks
+
     
   end
 
@@ -20,6 +22,7 @@ class UsersController < ApplicationController
       flash.now[:danger] = "You have entered an empty search string"
     else
       @users = User.search(params[:search_param])
+      @users = current_user.except_current_user(@users)
       #zasto je ovde if
       flash.now[:danger] = "No users matches this search cryteria" if @users.nil?
     end
@@ -27,6 +30,18 @@ class UsersController < ApplicationController
     respond_to do |format|
        format.js { render partial: 'friends/result.js' }
     end
+
+  end
+
+  def add_friend
+    @friend = User.find(params[:friend])
+    current_user.friendships.build(friend_id: @friend.id)
+    if current_user.save
+      flash[:notice] = "Friend was successfully added"
+    else
+      flash[:danger] = "There was something wrong with the friend request"
+    end
+    redirect_to my_friends_path
   end
   
  
