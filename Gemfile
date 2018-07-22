@@ -14,6 +14,7 @@ gem "stock_quote", '~> 2.0.0'
 gem "font-awesome-rails"
 # Use Puma as the app server
 gem 'puma', '~> 3.11'
+gem "aws-sdk-s3", require: false
 # Use SCSS for stylesheets
 gem 'sass-rails', '~> 5.0'
 # Use Uglifier as compressor for JavaScript assets
