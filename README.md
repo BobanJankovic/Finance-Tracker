@@ -1,6 +1,6 @@
 # README
 
-Reqirements
+Finance Tracker App
 
 1. Authentication system, users can sign in, sign up edit their profile, log in/out.
 2. User can track stocks (gem StockQuote), up to 10 per user. The profile page will display all the current stock prices.
